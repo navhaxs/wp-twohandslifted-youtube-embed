@@ -11,13 +11,3 @@
 
 // SHORTCODES
 include( plugin_dir_path( __FILE__ ) . 'youtubewatchparty_shortcode.php');
-
-function wpresonate_log_me($message) {
-    if (WP_DEBUG === true) {
-        if (is_array($message) || is_object($message)) {
-            error_log(print_r($message, true));
-        } else {
-            error_log($message);
-        }
-    }
-}

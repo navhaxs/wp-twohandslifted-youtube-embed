@@ -6,7 +6,7 @@
 var onYouTubeIframeAPIReady;
 
 // safely wrap jQuery code for WordPress
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function($) {
 
     // 1. Get shortcode parameters
     var shortcodeAtts = window.twohandsliftedYoutubeEmbedAtts;
@@ -16,9 +16,9 @@ jQuery(document).ready(function ($) {
     // DEV
     // DEV
     var dt = new Date();
-    dt.setSeconds( dt.getSeconds() + 60 );
+    dt.setSeconds(dt.getSeconds() + 60);
 
-    var start_time = dt; // shortcodeAtts.dt;//Date.parse()
+    var start_time = dt; // shortcodeAtts.start_time;//Date.parse()
     // DEV
     // DEV
     // DEV
@@ -34,11 +34,11 @@ jQuery(document).ready(function ($) {
     // 3. This function creates an <iframe> (and YouTube player)
     //    after the API code downloads.
     var player;
-    onYouTubeIframeAPIReady = function () {
+    onYouTubeIframeAPIReady = function() {
         player = new YT.Player('player', {
             height: '390',
             width: '640',
-            videoId: shortcodeAtts.videoid,
+            videoId: shortcodeAtts.video_id,
             playerVars: {
                 origin: window.location.origin,
                 rel: 0
@@ -57,7 +57,7 @@ jQuery(document).ready(function ($) {
 
         syncVideo();
 
-        $('#mutevideo').on('click', function () {
+        $('#mutevideo').on('click', function() {
             player.unMute();
         });
 
@@ -74,6 +74,7 @@ jQuery(document).ready(function ($) {
     }
 
     var registered_interval = null;
+
     function syncVideo() {
         // start video if check
         const now = Date.now();
@@ -82,7 +83,7 @@ jQuery(document).ready(function ($) {
         console.error(difference);
 
         if (difference >= 0) {
-            
+
             if (registered_interval != null) {
                 clearInterval(registered_interval);
             }
@@ -90,8 +91,7 @@ jQuery(document).ready(function ($) {
             // catch up to live point
             player.playVideo();
             player.seekTo(difference, true);
-        }
-        else if (difference < 0) {
+        } else if (difference < 0) {
             // wait for start time to release the video
 
             if (player.getCurrentTime() !== 0) {
@@ -101,7 +101,7 @@ jQuery(document).ready(function ($) {
             if (player.getPlayerState() === 1) {
                 player.stopVideo();
             }
-            
+
             if (registered_interval == null) {
                 registered_interval = setInterval(() => {
                     syncVideo();
@@ -114,5 +114,5 @@ jQuery(document).ready(function ($) {
         var dif = from_time - to_time;
         return dif / 1000;
     }
-    
+
 });

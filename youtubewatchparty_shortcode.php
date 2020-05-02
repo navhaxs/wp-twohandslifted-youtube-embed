@@ -13,8 +13,10 @@ add_action('wp_enqueue_scripts', 'twohandslifted_youtubewatchparty_wp_enqueue_sc
 add_shortcode('YouTubeWatchParty', function ($atts) {
 
     $x = shortcode_atts( array(
-        'videoid' => null//,
-        // 'foo' => 123,
+        'video_id' => null,
+        'start_time' => null,
+        'width' => 853,
+        'height' => 505,
     ), $atts );
 
     wp_enqueue_style('twohandslifted-youtubewatchparty');
@@ -24,6 +26,8 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
     // output plugin html
     ob_start();
     // <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    echo '<div class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $x['height'] . 'px; width: ' . $x['width'] . 'px;">';
     echo '<div id="player"></div>';
+    echo '</div>';
     return ob_get_clean();
 });
