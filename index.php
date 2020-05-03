@@ -1,7 +1,7 @@
 <?php
 /**
 * Plugin Name: YouTube Watch Party Embed
-* Plugin URI: http://myc.campusbiblestudy.org/
+* Plugin URI: https://visionscreens.au.eu.org/
 * Description: YouTube watch party embed shortcode for WordPress.
 * Version: 1.0
 * Author: Jeremy Wong

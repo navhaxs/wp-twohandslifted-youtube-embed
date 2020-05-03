@@ -1,7 +1,3 @@
-// "YouTube watch party embed shortcode for WordPress"
-// Jeremy Wong 2020 for CBS
-// v1.0
-
 // YouTube API expects this function
 var onYouTubeIframeAPIReady;
 
@@ -149,8 +145,8 @@ jQuery(document).ready(function($) {
         if (elem.children().length == 0) {
             var root = document.getElementById("twohandslifted_youtubewatchparty_wait");
             elem.empty();
-            addElement(root, "h3", "mt0 pb2 mb0").innerText = "Stay Tuned!";
-            addElement(root, "p", "mt0 pb2 mb0").innerText = "The evening session will begin at 7:30PM";
+            addElement(root, "h3", "").innerText = shortcodeParams.wait_title;
+            addElement(root, "p", "").innerText = shortcodeParams.wait_text;
         }
     }
 

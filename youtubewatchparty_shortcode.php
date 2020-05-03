@@ -19,6 +19,8 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
         'height' => 505,
         'enable_sync_button' => true,
         'debug' => false,
+        'wait_title' => "Stay Tuned!",
+        'wait_text' => "This is a scheduled video"
     ), $atts );
 
     wp_enqueue_style('twohandslifted-youtubewatchparty');
@@ -42,8 +44,8 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
     echo '<div class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $params['height'] . 'px; width: ' . $params['width'] . 'px;">';
     // NOTE: The <iframe> (and video player) will replace this <div> tag
     echo '<div id="twohandslifted_youtubewatchparty_overlay">';
+    echo '<div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_sync"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M13,6V18L21.5,12M4,18L12.5,12L4,6V18Z" /></svg>Resume live playback</div>';
     echo '<div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_unmute">Tap to unmute</div>';
-    echo '<div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_sync"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M13,6V18L21.5,12M4,18L12.5,12L4,6V18Z" /></svg>Skip ahead to live</div>';
     echo '</div>';
     echo '<div id="twohandslifted_youtubewatchparty_player"></div>';
     echo '<div id="twohandslifted_youtubewatchparty_wait"></div>';
