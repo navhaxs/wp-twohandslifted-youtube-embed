@@ -51,6 +51,8 @@ jQuery(document).ready(function($) {
         var unmuteButton = $(rootElement).find('.twohandslifted_youtubewatchparty_unmute');
         var syncButton = $(rootElement).find('.twohandslifted_youtubewatchparty_sync');
 
+        var sync_feature_enabled = start_time !== null && shortcodeParams.enable_sync_button === '1';
+
         var corrected_time_now; // Date
 
         var sync_clock_interval = null; // setInterval
@@ -70,8 +72,10 @@ jQuery(document).ready(function($) {
                 syncButton.css('visibility', 'collapse');
             });
 
-            // Begin the synced clock loop
-            if (sync_clock_interval == null) {
+            if (!sync_feature_enabled) {
+                syncVideo();
+            } else if (sync_clock_interval == null) {
+                // Begin the synced clock loop
                 sync_clock_interval = syncClockInterval((synced_time) => {
                     syncVideo(synced_time);
                 }, 1000);
@@ -80,7 +84,7 @@ jQuery(document).ready(function($) {
 
         // 5. The API calls this function when the player's state changes.
         function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.PAUSED && done && shortcodeParams.enable_sync_button === '1') {
+            if (event.data == YT.PlayerState.PAUSED && done && sync_feature_enabled) {
                 syncButton.css('visibility', 'visible');
             }
         }
