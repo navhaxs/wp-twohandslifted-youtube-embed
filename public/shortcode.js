@@ -12,16 +12,9 @@ jQuery(document).ready(function($) {
     var shortcodeParams = window.twohandsliftedYoutubeEmbedParams;
     var start_time = shortcodeParams.start_time ? Date.parse(shortcodeParams.start_time) : null;
 
-    // DEV
-    // DEV
-    // DEV
-    // DEV
-    start_time = new Date().setSeconds((new Date()).getSeconds() + 0);
-    // DEV
-    // DEV
-    // DEV
-    // DEV
-
+    if (shortcodeParams.debug === "1") {
+        start_time = new Date().setSeconds((new Date()).getSeconds() + 10);
+    }
 
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
