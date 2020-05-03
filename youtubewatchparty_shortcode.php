@@ -12,7 +12,7 @@ add_action('wp_enqueue_scripts', 'twohandslifted_youtubewatchparty_wp_enqueue_sc
 
 add_shortcode('YouTubeWatchParty', function ($atts) {
 
-    $x = shortcode_atts( array(
+    $params = shortcode_atts( array(
         'video_id' => null,
         'start_time' => null,
         'width' => 853,
@@ -21,15 +21,15 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
 
     wp_enqueue_style('twohandslifted-youtubewatchparty');
     wp_enqueue_script('twohandslifted-youtubewatchparty');
-    wp_localize_script('twohandslifted-youtubewatchparty','twohandsliftedYoutubeEmbedAtts',$x);
+    wp_localize_script('twohandslifted-youtubewatchparty','twohandsliftedYoutubeEmbedParams',$params);
 
-    if ($x['video_id'] == null) {
+    if ($params['video_id'] == null) {
         ob_start();
         echo '<div>video_id must be set</div>';
         return ob_get_clean();    
     }
 
-    if ($x['start_time'] == null) {
+    if ($params['start_time'] == null) {
         ob_start();
         echo '<div>start_time must be set</div>';
         return ob_get_clean();    
@@ -37,9 +37,9 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
 
     // output plugin html
     ob_start();
-    echo '<div class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $x['height'] . 'px; width: ' . $x['width'] . 'px;">';
+    echo '<div class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $params['height'] . 'px; width: ' . $params['width'] . 'px;">';
     // NOTE: The <iframe> (and video player) will replace this <div> tag
-    echo '<div id="twohandslifted_youtubewatchparty_overlay"><div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_unmute">Tap to unmute</div><div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_sync">Sync to live</div></div>';
+    echo '<div id="twohandslifted_youtubewatchparty_overlay"><div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_unmute">Tap to unmute</div><div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_sync">Skip ahead to live</div></div>';
     echo '<div id="twohandslifted_youtubewatchparty_player"></div>';
     echo '<div id="twohandslifted_youtubewatchparty_wait"></div>';
     echo '</div>';

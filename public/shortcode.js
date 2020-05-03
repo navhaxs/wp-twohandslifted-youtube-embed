@@ -9,8 +9,8 @@ var onYouTubeIframeAPIReady;
 jQuery(document).ready(function($) {
 
     // 1. Get shortcode parameters
-    var shortcodeAtts = window.twohandsliftedYoutubeEmbedAtts;
-    var start_time = Date.parse(shortcodeAtts.start_time);
+    var shortcodeParams = window.twohandsliftedYoutubeEmbedParams;
+    var start_time = shortcodeParams.start_time ? Date.parse(shortcodeParams.start_time) : null;
 
     // DEV
     // DEV
@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
     onYouTubeIframeAPIReady = function() {
         player = new YT.Player('twohandslifted_youtubewatchparty_player', {
             // host: 'https://www.youtube-nocookie.com', // disables "Watch later" button
-            videoId: shortcodeAtts.video_id,
+            videoId: shortcodeParams.video_id,
             playerVars: {
                 modestbranding: true,
                 origin: window.location.origin,
@@ -88,7 +88,7 @@ jQuery(document).ready(function($) {
         // start video if check
         const now = Date.now();
 
-        const difference = getSecondsBetweenDates(now, start_time);
+        const difference = start_time ? getSecondsBetweenDates(now, start_time) : 0;
         console.error(difference);
 
         if (difference >= 0) {
