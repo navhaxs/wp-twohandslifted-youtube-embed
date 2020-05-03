@@ -33,12 +33,6 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
         return ob_get_clean();    
     }
 
-    if ($params['start_time'] == null) {
-        ob_start();
-        echo '<div>start_time must be set</div>';
-        return ob_get_clean();    
-    }
-
     // output plugin html
     ob_start();
     echo '<div class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $params['height'] . 'px; max-width: ' . $params['width'] . 'px;">';

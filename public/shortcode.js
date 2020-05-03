@@ -6,9 +6,13 @@ jQuery(document).ready(function($) {
 
     // 1. Get shortcode parameters
     var shortcodeParams = window.twohandsliftedYoutubeEmbedParams;
-    var start_time = shortcodeParams.start_time ? Date.parse(shortcodeParams.start_time) : null;
+    var start_time = null;
 
-    if (shortcodeParams.debug === "1") {
+    if (shortcodeParams.start_time != null && shortcodeParams.start_time != "0") {
+        start_time = Date.parse(shortcodeParams.start_time);
+    }
+
+    if (start_time != null && shortcodeParams.debug === "1") {
         start_time = new Date().setSeconds((new Date()).getSeconds() + 10);
     }
 
@@ -47,6 +51,7 @@ jQuery(document).ready(function($) {
         $('#twohandslifted_youtubewatchparty_unmute').on('click', function() {
             player.unMute();
             document.getElementById('twohandslifted_youtubewatchparty_unmute').style.visibility = 'collapse';
+            document.getElementById("twohandslifted_youtubewatchparty_unmute").style.display = 'none';
         });
 
         $('#twohandslifted_youtubewatchparty_sync').on('click', function() {
@@ -80,6 +85,7 @@ jQuery(document).ready(function($) {
 
             // Display 'Tap to unmute' button
             document.getElementById("twohandslifted_youtubewatchparty_unmute").style.visibility = 'visible';
+            document.getElementById("twohandslifted_youtubewatchparty_unmute").style.display = 'block';
         }
     }
 
