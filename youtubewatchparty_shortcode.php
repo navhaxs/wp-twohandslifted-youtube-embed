@@ -17,6 +17,7 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
         'start_time' => null,
         'width' => 853,
         'height' => 505,
+        'enable_sync_button' => true,
     ), $atts );
 
     wp_enqueue_style('twohandslifted-youtubewatchparty');

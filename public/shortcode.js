@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
     // DEV
     // DEV
     // DEV
-    start_time = new Date().setSeconds((new Date()).getSeconds() + 10);
+    start_time = new Date().setSeconds((new Date()).getSeconds() + 0);
     // DEV
     // DEV
     // DEV
@@ -49,58 +49,74 @@ jQuery(document).ready(function($) {
         });
     }
 
+    var corrected_time_now;
+
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
 
-        event.target.playVideo();
+        // Register button events
+        $('#twohandslifted_youtubewatchparty_unmute').on('click', function() {
+            player.unMute();
+            document.getElementById('twohandslifted_youtubewatchparty_unmute').style.visibility = 'collapse';
+        });
 
-        if (player.getPlayerState() !== 1) {
-            // Most browsers will not autoplay unless muted :(
-            event.target.mute();
-            event.target.playVideo();
+        $('#twohandslifted_youtubewatchparty_sync').on('click', function() {
+            syncVideo(corrected_time_now, true);
+            document.getElementById('twohandslifted_youtubewatchparty_sync').style.visibility = 'collapse';
+        });
+
+        // Begin the synced clock loop
+        if (sync_clock_interval == null) {
+            sync_clock_interval = syncClockInterval((synced_time) => {
+                syncVideo(synced_time);
+            }, 1000);
+        }
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PAUSED && done && shortcodeParams.enable_sync_button === "1") {
+            document.getElementById("twohandslifted_youtubewatchparty_sync").style.visibility = 'visible';
+        }
+    }
+
+    function maybePlayVideo(user_initiated = false) {
+
+        player.playVideo();
+
+        if (!user_initiated) {
+            // Most browsers will not autoplay (unless muted) when the action was NOT user initiated :(
+            player.mute();
+            player.playVideo();
 
             // Display 'Tap to unmute' button
             document.getElementById("twohandslifted_youtubewatchparty_unmute").style.visibility = 'visible';
         }
-
-        syncVideo();
-
-        $('#twohandslifted_youtubewatchparty_unmute').on('click', function() {
-            player.unMute();
-            $('#twohandslifted_youtubewatchparty_unmute').remove();
-        });
-
     }
 
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    function onPlayerStateChange(event) {
-        // if (event.data == YT.PlayerState.PLAYING && !done) {
-        //     setTimeout(stopVideo, 6000);
-        //     done = true;
-        // }
-    }
+    var sync_clock_interval = null;
 
-    var registered_interval = null;
+    // This is the main loop
+    var done = false;
 
-    function syncVideo() {
-        // start video if check
-        const now = Date.now();
-
+    function syncVideo(synced_time = null, user_initiated = false) {
+        const now = synced_time || Date.now();
         const difference = start_time ? getSecondsBetweenDates(now, start_time) : 0;
-        console.error(difference);
 
         if (difference >= 0) {
             updatePlayerVisiblity(true);
 
-            if (registered_interval != null) {
-                clearInterval(registered_interval);
-            }
+            // if (sync_clock_interval != null) {
+            //     clearInterval(sync_clock_interval);
+            // }
 
-            // catch up to live point
-            player.playVideo();
-            player.seekTo(difference, true);
+            if (!done || user_initiated) {
+                done = true;
+
+                // catch up to live point
+                maybePlayVideo(user_initiated);
+                player.seekTo(difference, true);
+            }
         } else if (difference < 0) {
             // wait for start time to release the video
             updatePlayerVisiblity(false);
@@ -112,12 +128,6 @@ jQuery(document).ready(function($) {
 
             if (player.getPlayerState() === 1) {
                 player.stopVideo();
-            }
-
-            if (registered_interval == null) {
-                registered_interval = setInterval(() => {
-                    syncVideo();
-                }, 200);
             }
         }
     }
@@ -158,5 +168,44 @@ jQuery(document).ready(function($) {
         rootElement.appendChild(newChildElement);
         return newChildElement;
     };
+
+    function getSrvTime() {
+        var xmlHttp;
+        try {
+            //FF, Opera, Safari, Chrome
+            xmlHttp = new XMLHttpRequest();
+        } catch (err1) {
+            //IE
+            try {
+                xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
+            } catch (err2) {
+                try {
+                    xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
+                } catch (eerr3) {
+                    //AJAX not supported, use local machine time
+                    console.error("twohandslifted_youtubewatchparty_player: AJAX not supported");
+                    return null;
+                }
+            }
+        }
+        xmlHttp.open('HEAD', window.location.href.toString(), false);
+        xmlHttp.setRequestHeader("Content-Type", "text/html");
+        xmlHttp.send('');
+        return xmlHttp.getResponseHeader("Date");
+    }
+
+
+    function syncClockInterval(callback) {
+        var serverTime = new Date(getSrvTime());
+        var localTime = +Date.now();
+        var timeDiff = serverTime - localTime;
+
+        console.log('twohandslifted_youtubewatchparty_player: timeDiff=' + timeDiff);
+
+        return setInterval(function() {
+            corrected_time_now = +Date.now() + timeDiff;
+            callback && callback(corrected_time_now);
+        }, 1000);
+    }
 
 });
