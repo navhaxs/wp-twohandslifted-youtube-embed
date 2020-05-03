@@ -23,11 +23,25 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
     wp_enqueue_script('twohandslifted-youtubewatchparty');
     wp_localize_script('twohandslifted-youtubewatchparty','twohandsliftedYoutubeEmbedAtts',$x);
 
+    if ($x['video_id'] == null) {
+        ob_start();
+        echo '<div>video_id must be set</div>';
+        return ob_get_clean();    
+    }
+
+    if ($x['start_time'] == null) {
+        ob_start();
+        echo '<div>start_time must be set</div>';
+        return ob_get_clean();    
+    }
+
     // output plugin html
     ob_start();
-    // <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     echo '<div class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $x['height'] . 'px; width: ' . $x['width'] . 'px;">';
-    echo '<div id="player"></div>';
+    // NOTE: The <iframe> (and video player) will replace this <div> tag
+    echo '<div id="twohandslifted_youtubewatchparty_overlay"><div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_unmute">Tap to unmute</div><div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_sync">Sync to live</div></div>';
+    echo '<div id="twohandslifted_youtubewatchparty_player"></div>';
+    echo '<div id="twohandslifted_youtubewatchparty_wait"></div>';
     echo '</div>';
     return ob_get_clean();
 });
