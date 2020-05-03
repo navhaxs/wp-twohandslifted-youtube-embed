@@ -54,7 +54,7 @@
         visibility: visible;
     }
     
-    #twohandslifted_youtubewatchparty_overlay {
+    .twohandslifted_youtubewatchparty_videoWrapper .twohandslifted_youtubewatchparty_overlay {
         z-index: 1;
         position: absolute;
         display: flex;
@@ -66,19 +66,6 @@
         padding-bottom: 48px;
         pointer-events: none;
         visibility: hidden;
-    }
-    
-    #twohandslifted_youtubewatchparty_sync {
-        padding: 16px 20px;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        margin-bottom: 16px;
-        visibility: collapse;
-    }
-    
-    #twohandslifted_youtubewatchparty_sync svg {
-        margin-right: 4px;
     }
     
     .twohandslifted_youtubewatchparty_videoWrapper .twohandslifted_youtubewatchparty_button {
@@ -94,21 +81,34 @@
         box-shadow: 0 0 1em rgba(0, 0, 0, 1);
     }
     
-    .twohandslifted_youtubewatchparty_button:hover {
+    .twohandslifted_youtubewatchparty_videoWrapper .twohandslifted_youtubewatchparty_button:hover {
         color: #005bff;
         background: white;
     }
     
-    .twohandslifted_youtubewatchparty_button:active {
+    .twohandslifted_youtubewatchparty_videoWrapper .twohandslifted_youtubewatchparty_button:active {
         background: #ddd;
     }
     
-    #twohandslifted_youtubewatchparty_unmute {
+    .twohandslifted_youtubewatchparty_videoWrapper .twohandslifted_youtubewatchparty_button.twohandslifted_youtubewatchparty_sync {
+        padding: 16px 20px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        visibility: collapse;
+    }
+    
+    .twohandslifted_youtubewatchparty_videoWrapper .twohandslifted_youtubewatchparty_button.twohandslifted_youtubewatchparty_sync svg {
+        margin-right: 4px;
+    }
+    
+    .twohandslifted_youtubewatchparty_videoWrapper .twohandslifted_youtubewatchparty_unmute {
         visibility: hidden;
     }
     /* Branding */
     
-    #twohandslifted_youtubewatchparty_wait {
+    .twohandslifted_youtubewatchparty_videoWrapper .twohandslifted_youtubewatchparty_wait {
         background: #313131;
         color: white;
         text-align: center;
@@ -122,6 +122,6 @@
         top: 0;
     }
     
-    .twohandslifted_youtubewatchparty_videoWrapper #twohandslifted_youtubewatchparty_wait {
+    .twohandslifted_youtubewatchparty_videoWrapper .twohandslifted_youtubewatchparty_wait {
         color: white;
     }

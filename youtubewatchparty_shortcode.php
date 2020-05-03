@@ -12,7 +12,10 @@ add_action('wp_enqueue_scripts', 'twohandslifted_youtubewatchparty_wp_enqueue_sc
 
 add_shortcode('YouTubeWatchParty', function ($atts) {
 
+    $instance_id = uniqid();
+
     $params = shortcode_atts( array(
+        'instance_id' => $instance_id,
         'video_id' => null,
         'start_time' => null,
         'width' => 853,
@@ -25,7 +28,7 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
 
     wp_enqueue_style('twohandslifted-youtubewatchparty');
     wp_enqueue_script('twohandslifted-youtubewatchparty');
-    wp_localize_script('twohandslifted-youtubewatchparty','twohandsliftedYoutubeEmbedParams',$params);
+    wp_localize_script('twohandslifted-youtubewatchparty','twohandsliftedYoutubeEmbedParams' . $instance_id ,$params);
 
     if ($params['video_id'] == null) {
         ob_start();
@@ -35,14 +38,14 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
 
     // output plugin html
     ob_start();
-    echo '<div class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $params['height'] . 'px; max-width: ' . $params['width'] . 'px;">';
+    echo '<div data-instance-id="' . $instance_id . '" class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $params['height'] . 'px; max-width: ' . $params['width'] . 'px;">';
     // NOTE: The <iframe> (and video player) will replace this <div> tag
-    echo '<div id="twohandslifted_youtubewatchparty_overlay">';
-    echo '<div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_sync"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M13,6V18L21.5,12M4,18L12.5,12L4,6V18Z" /></svg>Resume live playback</div>';
-    echo '<div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_unmute">Tap to unmute</div>';
+    echo '<div class="twohandslifted_youtubewatchparty_overlay">';
+    echo '<div class="twohandslifted_youtubewatchparty_button twohandslifted_youtubewatchparty_sync"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M13,6V18L21.5,12M4,18L12.5,12L4,6V18Z" /></svg>Resume live playback</div>';
+    echo '<div class="twohandslifted_youtubewatchparty_button twohandslifted_youtubewatchparty_unmute">Tap to unmute</div>';
     echo '</div>';
-    echo '<div id="twohandslifted_youtubewatchparty_player"></div>';
-    echo '<div id="twohandslifted_youtubewatchparty_wait"></div>';
+    echo '<div id="twohandslifted_youtubewatchparty_player' . $instance_id . '"></div>';
+    echo '<div class="twohandslifted_youtubewatchparty_wait"></div>';
     echo '</div>';
     return ob_get_clean();
 });
