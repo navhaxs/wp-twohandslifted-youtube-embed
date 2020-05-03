@@ -41,7 +41,7 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
 
     // output plugin html
     ob_start();
-    echo '<div class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $params['height'] . 'px; width: ' . $params['width'] . 'px;">';
+    echo '<div class="twohandslifted_youtubewatchparty_videoWrapper" style="height: ' . $params['height'] . 'px; max-width: ' . $params['width'] . 'px;">';
     // NOTE: The <iframe> (and video player) will replace this <div> tag
     echo '<div id="twohandslifted_youtubewatchparty_overlay">';
     echo '<div class="twohandslifted_youtubewatchparty_button" id="twohandslifted_youtubewatchparty_sync"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M13,6V18L21.5,12M4,18L12.5,12L4,6V18Z" /></svg>Resume live playback</div>';

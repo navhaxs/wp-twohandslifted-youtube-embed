@@ -28,6 +28,7 @@ jQuery(document).ready(function($) {
             playerVars: {
                 modestbranding: true,
                 origin: window.location.origin,
+                enablejsapi: true,
                 rel: 0
             },
             events: {
@@ -93,10 +94,6 @@ jQuery(document).ready(function($) {
 
         if (difference >= 0) {
             updatePlayerVisiblity(true);
-
-            // if (sync_clock_interval != null) {
-            //     clearInterval(sync_clock_interval);
-            // }
 
             if (!done || user_initiated) {
                 done = true;
