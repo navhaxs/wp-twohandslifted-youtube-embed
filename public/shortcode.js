@@ -35,7 +35,6 @@ jQuery(document).ready(function($) {
     var player;
     onYouTubeIframeAPIReady = function() {
         player = new YT.Player('twohandslifted_youtubewatchparty_player', {
-            // host: 'https://www.youtube-nocookie.com', // disables "Watch later" button
             videoId: shortcodeParams.video_id,
             playerVars: {
                 modestbranding: true,
