@@ -18,7 +18,7 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
         'instance_id' => $instance_id,
         'video_id' => null,
         'start_time' => null,
-        'width' => 853,
+        'width' => 'inherit',
         'height' => 505,
         'enable_sync_button' => true,
         'debug' => false,

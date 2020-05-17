@@ -9,7 +9,7 @@ Usage: Use the shortcode `[YouTubeWatchParty video_id='qwJMUHEOW5g']`
 | Parameter          | Description | Example
 | ------------------ | ----------- | -------
 | video_id           | (String) Youtube Video Id | 'qwJMUHEOW5g'
-| width              | (Number) Embed width size in pixels           | '853'
+| width              | (Number) Embed width size in pixels           | '853' (Default value: 'inherit')
 | height             | (Number) Embed height size in pixels           | '505'
 
 By default, videos autoplay as soon as the page is loaded. This is ideal for e.g. embedding a YouTube Premiere.
@@ -19,6 +19,8 @@ By default, videos autoplay as soon as the page is loaded. This is ideal for e.g
 Turn any existing normal YouTube video into a 'watch party', when a valid `start_time` is given.
 
 **This means that playback for all viewers will be synced together to the same point in the video (or close to).**
+
+**WARNING - THIS IS UNTESTED (I DIDN't GO AHEAD WITH THIS FEATURE FOR LIVE USE!!!)**
 
 | Parameter          | Description | Example
 | ------------------ | ----------- | -------
