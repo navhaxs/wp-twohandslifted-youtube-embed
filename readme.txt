@@ -1,26 +1,28 @@
-=== WP Resonate ===
+=== YouTube Watch Party Embed ===
 Contributors: Jeremy Wong
 Tags: resonate
 Requires at least: 4.0
 Tested up to: 4.4.1
-Stable tag: 4.4.1
+Stable tag: 5.4.1
 License: GPLv2 or later
 
-Unofficial Resonate sermon integration plugin.
+YouTube watch party embed shortcode for WordPress
 
 == Description ==
 
-This unofficial plugin integrates Resonate sermons with a WordPress site.
+A WordPress plugin that lets you embed youtube videos with autoplay functionality.
 
-It includes a [WPResonateContent] shortcode to embed your church's sermons from the Resonate site, and also an optional widget that allows filtering this page by sermon series.
+Usage: Use the shortcode [YouTubeWatchParty video_id='qwJMUHEOW5g']
+
+See for more parameter documentation: https://github.com/navhaxs/wp-twohandslifted-youtube-embed
 
 == Installation ==
 
-Upload & activate. In the WP Resonate admin page, enter your church ID.
+Upload & activate. No admin screens.
 
 == Changelog ==
 
 = 0.0.1 =
-*Release Date - 2nd Feb, 2016*
+*Release Date - 17th May, 2020*
 
 * Initial Release

@@ -1,7 +1,7 @@
 <?php
 /**
 * Plugin Name: YouTube Watch Party Embed
-* Plugin URI: https://visionscreens.au.eu.org/
+* Plugin URI: https://github.com/navhaxs/wp-twohandslifted-youtube-embed
 * Description: YouTube watch party embed shortcode for WordPress.
 * Version: 1.0
 * Author: Jeremy Wong
