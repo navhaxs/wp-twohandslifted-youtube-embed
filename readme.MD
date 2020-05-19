@@ -4,6 +4,8 @@ A WordPress plugin that lets you embed youtube videos with autoplay functionalit
 
 Usage: Use the shortcode `[YouTubeWatchParty video_id='qwJMUHEOW5g']`
 
+Note: By default, autoplay will be applied only to the first top-most video on the WordPress page, unless the `autoplay=true` shortcode parameter was explicitly set.
+
 ## Shortcode Parameters
 
 | Parameter          | Description | Example
@@ -11,6 +13,7 @@ Usage: Use the shortcode `[YouTubeWatchParty video_id='qwJMUHEOW5g']`
 | video_id           | (String) Youtube Video Id | 'qwJMUHEOW5g'
 | width              | (Number) Embed width size in pixels           | '853' (Default value: 'inherit')
 | height             | (Number) Embed height size in pixels           | '505'
+| autoplay             | (Boolean) Whether to enable the functionality provided by this plugin | null
 
 By default, videos autoplay as soon as the page is loaded. This is ideal for e.g. embedding a YouTube Premiere.
 

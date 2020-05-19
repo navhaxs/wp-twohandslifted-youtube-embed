@@ -1,6 +1,6 @@
 <?php
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 function twohandslifted_youtubewatchparty_wp_enqueue_scripts()
 {
@@ -20,6 +20,7 @@ add_shortcode('YouTubeWatchParty', function ($atts) {
         'start_time' => null,
         'width' => 'inherit',
         'height' => 505,
+        'autoplay' => null,
         'enable_sync_button' => true,
         'debug' => false,
         'wait_title' => "Stay Tuned!",

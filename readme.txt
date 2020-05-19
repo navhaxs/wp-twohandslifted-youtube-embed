@@ -22,7 +22,14 @@ Upload & activate. No admin screens.
 
 == Changelog ==
 
-= 0.0.1 =
+= 1.1.0 =
+*Release Date - 20th May, 2020*
+
+- Autoplay only the first video on the page, unless explicitly autoplay=true
+
+- Watch for manual unmute event (ie from clicking unmute on the YouTube player control itself) and hide our 'Tap to unmute' button
+
+= 1.0.0 =
 *Release Date - 17th May, 2020*
 
 * Initial Release
