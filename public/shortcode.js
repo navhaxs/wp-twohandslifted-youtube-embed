@@ -56,8 +56,6 @@ jQuery(document).ready(function($) {
             }
         });
 
-        console.log(`${instanceId} is loading`);
-
         var unmuteButton = $(rootElement).find('.twohandslifted_youtubewatchparty_unmute');
         var syncButton = $(rootElement).find('.twohandslifted_youtubewatchparty_sync');
         // only the first (topmost in the WP Page) video should autoplay, unless overriden
