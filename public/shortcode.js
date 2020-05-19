@@ -59,7 +59,10 @@ jQuery(document).ready(function($) {
         var unmuteButton = $(rootElement).find('.twohandslifted_youtubewatchparty_unmute');
         var syncButton = $(rootElement).find('.twohandslifted_youtubewatchparty_sync');
         // only the first (topmost in the WP Page) video should autoplay, unless overriden
-        var autoplay_feature_enabled = index === 0 || shortcodeParams.autoplay === '1';
+        var initDate = new Date();
+        var isAfter5pm = initDate.getHours() >= 17;
+        var isBefore10pm = initDate.getHours() < 22;
+        var autoplay_feature_enabled = (index === 0 && isAfter5pm && isBefore10pm) || shortcodeParams.autoplay === '1';
         var sync_feature_enabled = start_time !== null && shortcodeParams.enable_sync_button === '1';
         var corrected_time_now; // Date
 
